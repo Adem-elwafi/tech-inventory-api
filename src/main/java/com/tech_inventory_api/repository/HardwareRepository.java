@@ -12,6 +12,10 @@ import java.util.List;
 public interface HardwareRepository extends JpaRepository<Hardware, Long> {
     // Requête dérivée : Spring génère automatiquement le SQL pour nous !
     List<Hardware> findByType(DeviceType type);
+
     // Pour vérifier si un numéro de série existe déjà
     boolean existsBySerialNumber(String serialNumber);
+
+    // Vérifie l'unicité du serial lors d'une mise à jour
+    boolean existsBySerialNumberAndIdNot(String serialNumber, Long id);
 }
